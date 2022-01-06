@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+   xmlns="http://www.springframework.org/schema/security"
+   xmlns:beans="http://www.springframework.org/schema/beans"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- root-context복붙해서 파일생성 후 위에 코드들로 바꿔서 넣기 -->
+<!-- form-login 이거 없으면 에러 뜸 -->	
+<!-- 밑에 5줄 하나하나 자체가 객체이다 -->	
+	<http>
+		<intercept-url pattern="/security/all" access="permitAll" />
+		<intercept-url pattern="/security/member" access="hasRole('ROLE_MEMBER')" />
+		<form-login/>
+	</http>
+	
+	
+	<authentication-manager>
+	<!-- 메모리로 유저하나 만든거 -->
+	     <authentication-provider> 
+       <user-service> 
+         <user name="member" password="{noop}member" authorities="ROLE_MEMBER" /> 
+         <user name="mananger" password="{noop}mananger" authorities="ROLE_MEMBER" /> 
+       </user-service> 
+     </authentication-provider>
+	
+	</authentication-manager>
+
+
+</beans:beans>
